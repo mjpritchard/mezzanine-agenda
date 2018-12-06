@@ -9,6 +9,7 @@ from django.contrib.sites.models import Site
 from django.db.models import Q
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
 
 from icalendar import Calendar
 
@@ -69,7 +70,7 @@ def event_list(request, tag=None, year=None, month=None, username=None,
     context = {"events": events, "year": year, "month": month,
                "tag": tag, "location": location, "author": author}
     templates.append(template)
-    return render(request, templates, context)
+    return TemplateResponse(request, templates, context)
 
 
 def event_detail(request, slug, year=None, month=None, day=None,
@@ -83,7 +84,7 @@ def event_detail(request, slug, year=None, month=None, day=None,
     event = get_object_or_404(events, slug=slug)
     context = {"event": event, "editable_obj": event}
     templates = [u"agenda/event_detail_%s.html" % str(slug), template]
-    return render(request, templates, context)
+    return TemplateResponse(request, templates, context)
 
 
 def event_feed(request, format, **kwargs):
