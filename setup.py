@@ -23,7 +23,7 @@ setup(name='mezzanine-agenda',
     ],
     install_requires=[
         'mezzanine',
-        'icalendar==3.0.1b2',
+        'icalendar==3.6',
         'geopy==0.95.1',
         'pytz',
     ],
