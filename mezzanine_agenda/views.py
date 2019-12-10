@@ -15,7 +15,7 @@ from icalendar import Calendar
 
 from mezzanine_agenda import __version__
 from mezzanine_agenda.models import Event, EventLocation
-from mezzanine_agenda.feeds import EventsRSS, EventsAtom
+from mezzanine_agenda.feeds import EventsRSS, EventsAtom, EventsRSSExt
 from mezzanine.conf import settings
 from mezzanine.generic.models import Keyword
 from mezzanine.pages.models import Page
@@ -92,7 +92,7 @@ def event_feed(request, format, **kwargs):
     Events feeds - maps format to the correct feed view.
     """
     try:
-        return {"rss": EventsRSS, "atom": EventsAtom}[format](**kwargs)(request)
+        return {"rss": EventsRSSExt, "atom": EventsAtom}[format](**kwargs)(request)
     except KeyError:
         raise Http404()
 
